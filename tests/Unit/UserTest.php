@@ -13,13 +13,22 @@ class UserTest extends TestCase
      *
      * @return void
      */
-    public function testExample()
+    public function testStatusCode()
+    {
+        $payload = [];
+
+        $response = $this->json('GET', '/api/users', $payload);
+
+        $this->assertEquals($response->getStatusCode(), 200);
+    }
+
+    public function testNotEmptyResponse()
     {
         $payload = [];
 
         $response = $this->json('GET', '/api/users', $payload);
         $response = $response->json();
 
-        dd($response);
+        $this->assertNotEmpty($response);
     }
 }
